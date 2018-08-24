@@ -34,6 +34,7 @@ Vue.component('multiselect', {
         handleChange(e) {
             // console.log(this.selectedItemsVirtual)
             this.$emit('update:selectedItems', this.selectedItemsVirtual)
+            this.$emit('change')
         }
     },
     created() {
