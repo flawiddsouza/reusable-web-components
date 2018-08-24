@@ -1,0 +1,22 @@
+<div id="components-demo">
+    <multiselect :items="items" value="id" text="name" :selected-items="selectedItems" v-on:update:selected-items="selectedItems = $event"></multiselect>
+    <br>
+    {{ selectedItems }}
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.js"></script>
+<script src="checkbox-multiselect.js"></script>
+<script>
+new Vue({
+    el: '#components-demo',
+    data: {
+        items: [
+            { id: 1, name: 'cat'},
+            { id: 2, name: 'hyena'},
+            { id: 3, name: 'cat2'},
+            { id: 4, name: 'hyena2'}
+        ],
+        selectedItems: [1]
+    }
+})
+</script>
