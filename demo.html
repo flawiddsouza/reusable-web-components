@@ -1,5 +1,5 @@
 <div id="components-demo">
-    <multiselect :items="items" value="id" text="name" :selected-items="selectedItems" v-on:update:selected-items="selectedItems = $event"></multiselect>
+    <multiselect :items="items" value="id" text="name" :selected-items.sync="selectedItems"></multiselect>
     <br>
     {{ selectedItems }}
 </div>
