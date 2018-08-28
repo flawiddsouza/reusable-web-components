@@ -20,13 +20,16 @@ Vue.component('multiselect', {
                 'overflow-y': 'auto',
                 'font-family': 'sans-serif'
             },
+            labelStyle: {
+                display: 'block'
+            },
             selectedItemsVirtual: []
         }
     },
     template: `
         <div :style="rootStyle">
             <div v-for="item in items">
-                <label><input type="checkbox" :value="item[value]" @change="handleChange($event)" v-model="selectedItemsVirtual"> {{ item[text] }}</label>
+                <label :style="labelStyle"><input type="checkbox" :value="item[value]" @change="handleChange($event)" v-model="selectedItemsVirtual"> {{ item[text] }}</label>
             </div>
         </div>
     `,
