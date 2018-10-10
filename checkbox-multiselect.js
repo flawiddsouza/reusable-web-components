@@ -18,16 +18,19 @@ Vue.component('multiselect', {
                 'min-width': '10em',
                 color: '#757575',
                 'overflow-y': 'auto',
-                'font-family': 'sans-serif'
+                'font-family': 'sans-serif',
+                position: 'relative'
             },
             labelStyle: {
                 display: 'block'
             },
-            selectedItemsVirtual: []
+            selectedItemsVirtual: [],
+            selectAll: false
         }
     },
     template: `
         <div :style="rootStyle">
+            <div style="position: sticky" v-if="items.length > 0"><label :style="labelStyle"><input type="checkbox" value="true" @change="selectAllChanged" v-model="selectAll"> Select All</label></div>
             <div v-for="item in items">
                 <label :style="labelStyle"><input type="checkbox" :value="item[value]" @change="handleChange($event)" v-model="selectedItemsVirtual"> {{ item[text] }}</label>
             </div>
@@ -35,12 +38,31 @@ Vue.component('multiselect', {
     `,
     methods: {
         handleChange(e) {
-            // console.log(this.selectedItemsVirtual)
+            this.handleSelectAllCheckbox()
             this.$emit('update:selectedItems', this.selectedItemsVirtual)
             this.$emit('change')
+        },
+        selectAllChanged() {
+            if(this.selectAll) {
+                this.selectedItemsVirtual = this.items.map(item => item.key)
+            } else {
+                this.selectedItemsVirtual = []
+            }
+            this.handleChange()
+        },
+        handleSelectAllCheckbox() {
+            if(this.selectedItemsVirtual.length < this.items.length) {
+                this.selectAll = false
+            }
+            if(this.selectedItemsVirtual.length === this.items.length) {
+                this.selectAll = true
+            }
         }
     },
-    created() {
-        this.selectedItemsVirtual = this.selectedItems
+    watch: {
+        selectedItems() {
+            this.selectedItemsVirtual = this.selectedItems
+            this.handleSelectAllCheckbox()
+        }
     }
 })
