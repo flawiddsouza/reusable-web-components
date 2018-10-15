@@ -18,8 +18,7 @@ Vue.component('multiselect', {
                 'min-width': '10em',
                 color: '#757575',
                 'overflow-y': 'auto',
-                'font-family': 'sans-serif',
-                position: 'relative'
+                'font-family': 'sans-serif'
             },
             labelStyle: {
                 display: 'block'
@@ -30,7 +29,7 @@ Vue.component('multiselect', {
     },
     template: `
         <div :style="rootStyle">
-            <div style="position: sticky" v-if="items.length > 0"><label :style="labelStyle"><input type="checkbox" value="true" @change="selectAllChanged" v-model="selectAll"> Select All</label></div>
+            <div v-if="items.length > 0"><label :style="labelStyle"><input type="checkbox" value="true" v-model="selectAll" @change="selectAllChanged"> Select All</label></div>
             <div v-for="item in items">
                 <label :style="labelStyle"><input type="checkbox" :value="item[value]" @change="handleChange($event)" v-model="selectedItemsVirtual"> {{ item[text] }}</label>
             </div>
@@ -54,7 +53,7 @@ Vue.component('multiselect', {
             if(this.selectedItemsVirtual.length < this.items.length) {
                 this.selectAll = false
             }
-            if(this.selectedItemsVirtual.length === this.items.length) {
+            if(this.selectedItemsVirtual.length > 0 && this.selectedItemsVirtual.length === this.items.length) {
                 this.selectAll = true
             }
         }
