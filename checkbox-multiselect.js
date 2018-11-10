@@ -62,6 +62,10 @@ Vue.component('multiselect', {
         selectedItems() {
             this.selectedItemsVirtual = this.selectedItems
             this.handleSelectAllCheckbox()
+        },
+        items() {
+            this.selectedItemsVirtual = []
+            this.handleChange()
         }
     }
 })
