@@ -1,0 +1,35 @@
+<style>
+body {
+    margin: 0;
+    font-family: sans-serif;
+}
+
+* {
+    box-sizing: border-box;
+}
+</style>
+
+<script type="module">
+import ApplicationFrame from './components/ApplicationFrame.js'
+import LoremIpsum from './components/LoremIpsum.js'
+
+window.customElements.define('application-frame', ApplicationFrame)
+window.customElements.define('lorem-ipsum', LoremIpsum)
+</script>
+
+<application-frame header-height="2em">
+    <div slot="header" style="display: flex; align-items: center; height: 100%;">
+        <a href="/" style="margin-left: 1em">
+            My App
+        </a>
+    </div>
+    <div slot="sidebar" style="margin-top: 1em">
+        <div style="padding: 0.2em 1em">Sidebar Item 1</div>
+        <div style="padding: 0.2em 1em">Sidebar Item 2</div>
+        <div style="padding: 0.2em 1em">Sidebar Item 3</div>
+        <div style="padding: 0.2em 1em">Sidebar Item 4</div>
+    </div>
+    <div slot="content" style="padding: 1em">
+        <lorem-ipsum></lorem-ipsum>
+    </div>
+</application-frame>
